@@ -1,0 +1,124 @@
+{
+  "start": "-PT1H",
+  "periodOverride": "auto",
+  "widgets": [
+    {
+      "type": "metric", "x": 0, "y": 0, "width": 12, "height": 6,
+      "properties": {
+        "title": "Gateway ALB: RequestCount (Sum)",
+        "region": "us-east-1", "view": "timeSeries", "stat": "Sum", "period": 60,
+        "metrics": [
+          ["AWS/ApplicationELB", "RequestCount", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff"]
+        ]
+      }
+    },
+    {
+      "type": "metric", "x": 12, "y": 0, "width": 12, "height": 6,
+      "properties": {
+        "title": "Gateway ALB: RequestCountPerTarget (scaler target = 100/min)",
+        "region": "us-east-1", "view": "timeSeries", "stat": "Sum", "period": 60,
+        "metrics": [
+          ["AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/file-transfer-gateway/4314c36ca681d0d5", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff"]
+        ],
+        "annotations": { "horizontal": [{ "label": "scaler target", "value": 100 }] }
+      }
+    },
+    {
+      "type": "metric", "x": 0, "y": 6, "width": 12, "height": 6,
+      "properties": {
+        "title": "Gateway ALB: TargetResponseTime p50 / p95 (seconds)",
+        "region": "us-east-1", "view": "timeSeries", "period": 60,
+        "metrics": [
+          ["AWS/ApplicationELB", "TargetResponseTime", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff", { "stat": "p50", "label": "p50" }],
+          ["AWS/ApplicationELB", "TargetResponseTime", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff", { "stat": "p95", "label": "p95" }]
+        ]
+      }
+    },
+    {
+      "type": "metric", "x": 12, "y": 6, "width": 12, "height": 6,
+      "properties": {
+        "title": "Gateway ALB: 2XX vs Target 5XX (Sum)",
+        "region": "us-east-1", "view": "timeSeries", "stat": "Sum", "period": 60,
+        "metrics": [
+          ["AWS/ApplicationELB", "HTTPCode_Target_2XX_Count", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff", { "label": "2XX" }],
+          ["AWS/ApplicationELB", "HTTPCode_Target_5XX_Count", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff", { "label": "5XX (503 + 504)" }]
+        ]
+      }
+    },
+    {
+      "type": "metric", "x": 0, "y": 12, "width": 12, "height": 6,
+      "properties": {
+        "title": "Gateway: HealthyHostCount (tasks)",
+        "region": "us-east-1", "view": "timeSeries", "stat": "Average", "period": 60,
+        "metrics": [
+          ["AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/file-transfer-gateway/4314c36ca681d0d5", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff"]
+        ],
+        "yAxis": { "left": { "min": 0 } }
+      }
+    },
+    {
+      "type": "metric", "x": 12, "y": 12, "width": 12, "height": 6,
+      "properties": {
+        "title": "Backend NLB: HealthyHostCount (tasks)",
+        "region": "us-east-1", "view": "timeSeries", "stat": "Average", "period": 60,
+        "metrics": [
+          ["AWS/NetworkELB", "HealthyHostCount", "TargetGroup", "targetgroup/file-transfer-backend/58d0497052c2b2c6", "LoadBalancer", "net/file-transfer-backend/823a5d12be2876fe"]
+        ],
+        "yAxis": { "left": { "min": 0 } }
+      }
+    },
+    {
+      "type": "metric", "x": 0, "y": 18, "width": 12, "height": 6,
+      "properties": {
+        "title": "ECS CPUUtilization % (backend scaler target = 60)",
+        "region": "us-east-1", "view": "timeSeries", "period": 60,
+        "metrics": [
+          ["AWS/ECS", "CPUUtilization", "ClusterName", "file-transfer", "ServiceName", "gateway", { "stat": "Average", "label": "gateway avg" }],
+          ["AWS/ECS", "CPUUtilization", "ClusterName", "file-transfer", "ServiceName", "gateway", { "stat": "Maximum", "label": "gateway max" }],
+          ["AWS/ECS", "CPUUtilization", "ClusterName", "file-transfer", "ServiceName", "backend", { "stat": "Average", "label": "backend avg" }],
+          ["AWS/ECS", "CPUUtilization", "ClusterName", "file-transfer", "ServiceName", "backend", { "stat": "Maximum", "label": "backend max" }]
+        ],
+        "annotations": { "horizontal": [{ "label": "backend scaler target", "value": 60 }] },
+        "yAxis": { "left": { "min": 0 } }
+      }
+    },
+    {
+      "type": "metric", "x": 12, "y": 18, "width": 12, "height": 6,
+      "properties": {
+        "title": "ECS MemoryUtilization %",
+        "region": "us-east-1", "view": "timeSeries", "period": 60,
+        "metrics": [
+          ["AWS/ECS", "MemoryUtilization", "ClusterName", "file-transfer", "ServiceName", "gateway", { "stat": "Average", "label": "gateway avg" }],
+          ["AWS/ECS", "MemoryUtilization", "ClusterName", "file-transfer", "ServiceName", "gateway", { "stat": "Maximum", "label": "gateway max" }],
+          ["AWS/ECS", "MemoryUtilization", "ClusterName", "file-transfer", "ServiceName", "backend", { "stat": "Average", "label": "backend avg" }],
+          ["AWS/ECS", "MemoryUtilization", "ClusterName", "file-transfer", "ServiceName", "backend", { "stat": "Maximum", "label": "backend max" }]
+        ],
+        "yAxis": { "left": { "min": 0 } }
+      }
+    },
+    {
+      "type": "log", "x": 0, "y": 24, "width": 8, "height": 6,
+      "properties": {
+        "title": "Backend: queue-full drops per minute",
+        "region": "us-east-1", "view": "timeSeries", "stacked": false,
+        "query": "SOURCE '/ecs/file-transfer-backend' | filter @message like /Overloaded: dropped/ | stats count() as drops by bin(1m)"
+      }
+    },
+    {
+      "type": "log", "x": 8, "y": 24, "width": 8, "height": 6,
+      "properties": {
+        "title": "Backend: RETY requests handled per minute",
+        "region": "us-east-1", "view": "timeSeries", "stacked": false,
+        "query": "SOURCE '/ecs/file-transfer-backend' | filter @message like /Processing RETY for file/ | stats count() as rety by bin(1m)"
+      }
+    },
+    {
+      "type": "log", "x": 16, "y": 24, "width": 8, "height": 6,
+      "properties": {
+        "title": "Gateway: retry rounds started per minute",
+        "region": "us-east-1", "view": "timeSeries", "stacked": false,
+        "query": "SOURCE '/ecs/file-transfer-gateway' | filter @message like /Missing chunks/ | stats count() as rounds by bin(1m)"
+      }
+    }
+  ]
+}
