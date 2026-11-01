@@ -8,7 +8,7 @@
         "title": "Gateway ALB: RequestCount (Sum)",
         "region": "us-east-1", "view": "timeSeries", "stat": "Sum", "period": 60,
         "metrics": [
-          ["AWS/ApplicationELB", "RequestCount", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff"]
+          ["AWS/ApplicationELB", "RequestCount", "LoadBalancer", "app/file-transfer-gateway/87443980c6182c56"]
         ]
       }
     },
@@ -18,7 +18,7 @@
         "title": "Gateway ALB: RequestCountPerTarget (scaler target = 100/min)",
         "region": "us-east-1", "view": "timeSeries", "stat": "Sum", "period": 60,
         "metrics": [
-          ["AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/file-transfer-gateway/4314c36ca681d0d5", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff"]
+          ["AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/file-transfer-gateway/6b1ea88b506dc8ab", "LoadBalancer", "app/file-transfer-gateway/87443980c6182c56"]
         ],
         "annotations": { "horizontal": [{ "label": "scaler target", "value": 100 }] }
       }
@@ -29,8 +29,8 @@
         "title": "Gateway ALB: TargetResponseTime p50 / p95 (seconds)",
         "region": "us-east-1", "view": "timeSeries", "period": 60,
         "metrics": [
-          ["AWS/ApplicationELB", "TargetResponseTime", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff", { "stat": "p50", "label": "p50" }],
-          ["AWS/ApplicationELB", "TargetResponseTime", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff", { "stat": "p95", "label": "p95" }]
+          ["AWS/ApplicationELB", "TargetResponseTime", "LoadBalancer", "app/file-transfer-gateway/87443980c6182c56", { "stat": "p50", "label": "p50" }],
+          ["AWS/ApplicationELB", "TargetResponseTime", "LoadBalancer", "app/file-transfer-gateway/87443980c6182c56", { "stat": "p95", "label": "p95" }]
         ]
       }
     },
@@ -40,8 +40,8 @@
         "title": "Gateway ALB: 2XX vs Target 5XX (Sum)",
         "region": "us-east-1", "view": "timeSeries", "stat": "Sum", "period": 60,
         "metrics": [
-          ["AWS/ApplicationELB", "HTTPCode_Target_2XX_Count", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff", { "label": "2XX" }],
-          ["AWS/ApplicationELB", "HTTPCode_Target_5XX_Count", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff", { "label": "5XX (503 + 504)" }]
+          ["AWS/ApplicationELB", "HTTPCode_Target_2XX_Count", "LoadBalancer", "app/file-transfer-gateway/87443980c6182c56", { "label": "2XX" }],
+          ["AWS/ApplicationELB", "HTTPCode_Target_5XX_Count", "LoadBalancer", "app/file-transfer-gateway/87443980c6182c56", { "label": "5XX (503 + 504)" }]
         ]
       }
     },
@@ -51,7 +51,7 @@
         "title": "Gateway: HealthyHostCount (tasks)",
         "region": "us-east-1", "view": "timeSeries", "stat": "Average", "period": 60,
         "metrics": [
-          ["AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/file-transfer-gateway/4314c36ca681d0d5", "LoadBalancer", "app/file-transfer-gateway/700e554e367b88ff"]
+          ["AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/file-transfer-gateway/6b1ea88b506dc8ab", "LoadBalancer", "app/file-transfer-gateway/87443980c6182c56"]
         ],
         "yAxis": { "left": { "min": 0 } }
       }
@@ -62,7 +62,7 @@
         "title": "Backend NLB: HealthyHostCount (tasks)",
         "region": "us-east-1", "view": "timeSeries", "stat": "Average", "period": 60,
         "metrics": [
-          ["AWS/NetworkELB", "HealthyHostCount", "TargetGroup", "targetgroup/file-transfer-backend/58d0497052c2b2c6", "LoadBalancer", "net/file-transfer-backend/823a5d12be2876fe"]
+          ["AWS/NetworkELB", "HealthyHostCount", "TargetGroup", "targetgroup/file-transfer-backend/4d4cfaa89e752d2c", "LoadBalancer", "net/file-transfer-backend/c816b913fa34a590"]
         ],
         "yAxis": { "left": { "min": 0 } }
       }
